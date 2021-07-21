@@ -1,5 +1,6 @@
 package com.queen.finalspace.ui;
 
+import androidx.annotation.NonNull;
 import  androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,13 +8,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.queen.finalspace.Constants;
 import com.queen.finalspace.R;
 
@@ -32,17 +37,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mSearchedLocationReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
+
+        mSearchedLocationReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+               for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()){
+                   Log.d("Locations updated", "location: " + locationSnapshot.getValue().toString());
+               }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
        // mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
       //  mEditor = mSharedPreferences.edit();
-
-        mSearchedLocationReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
 
         mFindSeasonButton.setOnClickListener(this);
     }
