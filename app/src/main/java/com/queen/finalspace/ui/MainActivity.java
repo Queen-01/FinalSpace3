@@ -69,12 +69,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == mFindSeasonButton) {
-            String location = mFindEditText.getText().toString();
             saveLocationToFireBase(location);
-
             Toast.makeText(MainActivity.this, "Watch Out!", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(MainActivity.this, FindActivity.class);
-            intent.putExtra("location", location);
             startActivity(intent);
         }
     }

@@ -9,8 +9,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 //import com.example.finalspace.adapter.FindSpaceListAdapter;
@@ -20,6 +24,7 @@ import com.queen.finalspace.adapter.EpisodeListAdapter;
 import com.queen.finalspace.model.Episode;
 import com.queen.finalspace.service.FinalSpaceClient;
 
+import java.security.PublicKey;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -35,21 +40,22 @@ public class FindActivity extends AppCompatActivity {
     EpisodeListAdapter mAdapter;
     List<Episode> EpisodeList;
 
-    //private SharedPreferences mSharedPreferences;
-    //private String mRecentAddress;
+    private SharedPreferences.Editor mEditor;
+    private SharedPreferences mSharedPreferences;
+    private String mRecentAddress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find);
         ButterKnife.bind(this);
 
-
-
-       // mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-       // mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCE_LOCATION_KEY, null);
-       //   String location = mRecentAddress;
-        Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCE_LOCATION_KEY, null);
+//        if (mRecentAddress !=null){
+//            fetchEpisodeList(mRecentAddress);
+//        }
+//        Intent intent = getIntent();
+//        String location = intent.getStringExtra("location");
 
         recyclerView = findViewById(R.id.recyclerview);
         progressBar = findViewById(R.id.progressBar);
@@ -57,6 +63,48 @@ public class FindActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         fetchEpisodeList();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                addToSharedPreferences(location);
+                fetchEpisodeList();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String location) {
+                return false;
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        return  super.onOptionsItemSelected(item);
+    }
+    //@Override
+    public void onFailure(Call<List<Episode>> call, Throwable t) {
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(FindActivity.this, "Error occured" + t.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+    private void addToSharedPreferences(String location){
+        mEditor.putString(Constants.PREFERENCE_LOCATION_KEY, location).apply();
     }
 
     public void fetchEpisodeList(){
@@ -79,4 +127,5 @@ public class FindActivity extends AppCompatActivity {
             }
         });
     }
+
 }
