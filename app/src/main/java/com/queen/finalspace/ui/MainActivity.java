@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
    // private SharedPreferences mSharedPreferences;
     //private SharedPreferences.Editor mEditor;
+    private ValueEventListener mSearchedLocationReferenceListener;
     private DatabaseReference mSearchedLocationReference;
 
     @BindView(R.id.findseasonsButton) Button mFindSeasonButton;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
 
-        mSearchedLocationReference.addValueEventListener(new ValueEventListener() {
+        mSearchedLocationReferenceListener = mSearchedLocationReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()){
@@ -82,4 +83,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSearchedLocationReference.setValue(location);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSearchedLocationReference.removeEventListener(mSearchedLocationReferenceListener);
+    }
 }
