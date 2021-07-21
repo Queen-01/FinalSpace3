@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "955861678359",
+    "project_id": "finalspace-56739",
+    "storage_bucket": "finalspace-56739.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955861678359:android:560bcfbf6cc6a569a1df52",
+        "android_client_info": {
+          "package_name": "com.queen.finalspace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955861678359-e0s9drg3k3j38d3eh8leuce5s0kvu1i9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB__paE7lyrvHkuhirxrCuZa6NFJmrCPYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955861678359-e0s9drg3k3j38d3eh8leuce5s0kvu1i9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

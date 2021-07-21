@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="739dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="-8dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/fin" />
+
+    <TextView
+        android:id="@+id/finalspace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Final Space"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:fontFamily="cursive"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/findEditText"
+        android:background="@color/teal_700"
+        android:layout_above="@+id/findseasonsButton"
+        android:layout_marginBottom="10dp"
+        android:padding="5dp"
+        android:hint="Enter season"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/findseasonsButton"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:color="#252425"
+        android:text="Find Seasons" />
+
+
+
+</RelativeLayout>
