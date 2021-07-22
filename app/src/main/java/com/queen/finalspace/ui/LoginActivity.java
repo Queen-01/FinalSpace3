@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
 
 import com.queen.finalspace.R;
 
@@ -14,6 +15,7 @@ import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     @BindView(R.id.registerTextView) TextView mRegisterTextView;
+    @BindView(R.id.passwordLoginButton) Button mPasswordLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +28,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view){
         if (view == mRegisterTextView){
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this,  CreateAccountActivity.class);
             startActivity(intent);
-            finish();
         }
     }
+
 }
