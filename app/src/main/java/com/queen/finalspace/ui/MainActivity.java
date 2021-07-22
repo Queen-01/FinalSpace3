@@ -147,4 +147,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            mAuth.removeAuthStateListener(mAuthListener);
 //        }
 //    }
+
+
 }
