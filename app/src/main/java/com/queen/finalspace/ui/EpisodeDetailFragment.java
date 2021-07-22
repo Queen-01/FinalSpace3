@@ -1,5 +1,6 @@
 package com.queen.finalspace.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Button;
 
 import com.queen.finalspace.R;
 import com.squareup.picasso.Picasso;
@@ -24,13 +27,12 @@ import butterknife.ButterKnife;
  * Use the {@link EpisodeDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EpisodeDetailFragment extends Fragment {
+public class EpisodeDetailFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.episodeImageView) ImageView mImageView;
     @BindView(R.id.detailEpisodeName) TextView mEpisodeName;
     @BindView(R.id.detailEpisodeWriter) TextView mEpisodeWriter;
     @BindView(R.id.detailEpisodeDirector) TextView mEpisodeDirector;
-
     @BindView(R.id.like) TextView mLikeTextView;
     @BindView(R.id.unlike) TextView mUnlikeTextView;
     private Episode episode;
@@ -65,10 +67,21 @@ public class EpisodeDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_episode_detail,container,false);
         ButterKnife.bind(this, view);
+        mButton2 = (Button) view.findViewById(R.id.button2);
+        mButton2.setOnClickListener(this);
+
         Picasso.get().load(R.drawable.images).into(mImageView);
         mEpisodeName.setText("Episode Name: "+episode.getName());
         mEpisodeWriter.setText("Episode Writer: " + episode.getWriter());
         mEpisodeDirector.setText("Episode Director :" + episode.getDirector());
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mButton2) {
+            Intent intent = new Intent(EpisodeDetailFragment.this, CreateAccountActivity.class);
+            startActivity(intent);
+        }
     }
 }

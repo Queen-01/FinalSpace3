@@ -69,5 +69,12 @@
                 android:drawableLeft="@drawable/outline_thumb_down_alt_black_24dp" />
 
         </RelativeLayout>
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="245dp"
+                android:layout_height="wrap_content"
+                android:text="Create account"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
     </LinearLayout>
 </FrameLayout>
