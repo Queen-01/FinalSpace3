@@ -49,12 +49,4 @@
         android:visibility="gone">
 
     </ListView>
-
-    <!--    <Button-->
-    <!--        android:id="@+id/button2"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="Checkout episodes"-->
-    <!--        android:layout_width="245dp"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        android:layout_centerHorizontal="true"/>-->
 </RelativeLayout>
